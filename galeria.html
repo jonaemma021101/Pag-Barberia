@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Galería - Barbería JEHO</title>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-storage-compat.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #111;
+            color: #fff;
+        }
+        
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .gallery img {
+            width: 220px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(255, 255, 255, 0.2);
+        }
+        
+        #uploadSection {
+            margin: 20px 0;
+            display: none;
+        }
+        
+        input[type="file"],
+        button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Galería de la Barbería JEHO</h1>
+
+    <button id="loginBtn">Iniciar sesión con Google</button>
+
+    <div id="uploadSection">
+        <input type="file" id="imageInput" />
+        <button onclick="uploadImage()">Subir imagen</button>
+    </div>
+
+    <div class="gallery" id="gallery"></div>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyAcnm24xc8em4MWFXyLuHvvlmdGCVS47Qc",
+            authDomain: "barberiajeho.firebaseapp.com",
+            projectId: "barberiajeho",
+            storageBucket: "barberiajeho.appspot.com",
+            messagingSenderId: "168190651597",
+            appId: "1:168190651597:web:277b9c4665b95a3a064d84",
+            measurementId: "G-3SJQ2BQ4XL"
+        };
+
+        // ⚠️ Coloca aquí tu UID de Firebase (después de iniciar sesión, lo verás en consola)
+        const adminUID = "REEMPLAZAR_POR_TU_UID";
+
+        // Inicializa Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const storage = firebase.storage();
+
+        const loginBtn = document.getElementById("loginBtn");
+        const uploadSection = document.getElementById("uploadSection");
+
+        loginBtn.onclick = () => {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider)
+                .then(result => {
+                    console.log("UID:", result.user.uid);
+                    if (result.user.uid !== adminUID) {
+                        alert("No tienes permiso para subir imágenes.");
+                    }
+                });
+        };
+
+        auth.onAuthStateChanged(user => {
+            if (user && user.uid === adminUID) {
+                uploadSection.style.display = "block";
+            }
+        });
+
+        function uploadImage() {
+            const file = document.getElementById("imageInput").files[0];
+            if (!file) return alert("Selecciona una imagen");
+
+            const storageRef = storage.ref("galeria/" + Date.now() + "-" + file.name);
+            storageRef.put(file).then(() => {
+                alert("Imagen subida con éxito");
+                loadGallery();
+            });
+        }
+
+        function loadGallery() {
+            const gallery = document.getElementById("gallery");
+            gallery.innerHTML = "";
+            const listRef = storage.ref("galeria/");
+            listRef.listAll().then(res => {
+                res.items.forEach(itemRef => {
+                    itemRef.getDownloadURL().then(url => {
+                        const img = document.createElement("img");
+                        img.src = url;
+                        gallery.appendChild(img);
+                    });
+                });
+            });
+        }
+
+        loadGallery();
+    </script>
+</body>
+
+</html>
