@@ -64,11 +64,10 @@
         <div class="row">
             <div class="col-md-6 mb-4">
                 <h5>Información de Contacto</h5>
-                <p><strong>Teléfono:</strong> 55 1234 5678</p>
-                <p><strong>WhatsApp:</strong> 55 8765 4321</p>
+                <p><strong>Teléfono:</strong> 56 2104 4287</p>
+                <p><strong>WhatsApp:</strong> 56 2104 4287</p>
                 <p><strong>Instagram:</strong> @barberiajeho</p>
-                <p><strong>Facebook:</strong> /barberiajeho</p>
-                <p><strong>Ubicación:</strong> Calle Reforma #123, Centro, CDMX</p>
+                <p><strong>Ubicación:</strong> Olivar Santa María TULYEHUALCO,Tlahúac CDMX</p>
             </div>
 
             <div class="col-md-6">
@@ -94,18 +93,40 @@
 
     <script>
         function enviarWhatsApp() {
-            const numeroWhatsApp = "5215621044287";
-
+            const numeroWhatsApp = "5215621044287"; // Reemplaza con tu número real
             const nombre = document.getElementById("nombre").value;
             const telefono = document.getElementById("telefono").value;
             const mensaje = document.getElementById("mensaje").value;
 
-            const texto = `Nuevo mensaje de contacto:%0A%0A <3 Nombre: ${nombre}%0A 📞 Teléfono: ${telefono}%0A 📝 Mensaje: ${mensaje}`;
-            const url = `https://wa.me/${numeroWhatsApp}?text=${texto}`;
+            // Generar fecha y hora actuales en formato legible
+            const fecha = new Date();
+            const opcionesFecha = {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+            };
+            const opcionesHora = {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            };
+            const fechaTexto = fecha.toLocaleDateString('es-MX', opcionesFecha);
+            const horaTexto = fecha.toLocaleTimeString('es-MX', opcionesHora);
 
+            const texto = encodeURIComponent(`*Cliente Barbería:*
+
+    📅 *Fecha:* ${fechaTexto}
+    🕒 *Hora:* ${horaTexto}
+
+    👤 *Nombre:* ${nombre}
+    📞 *Teléfono:* ${telefono}
+    📝 *Mensaje:* ${mensaje}`);
+
+            const url = `https://wa.me/${numeroWhatsApp}?text=${texto}`;
             window.open(url, '_blank');
         }
     </script>
+
 </body>
 
 </html>
