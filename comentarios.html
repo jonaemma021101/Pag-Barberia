@@ -112,7 +112,15 @@
                 loginBtn.classList.add("d-none");
                 logoutBtn.classList.remove("d-none");
                 commentForm.classList.remove("d-none");
+
                 userName.textContent = user.displayName;
+
+                if (user.uid === "ZVo5h7IDfobUjUzAO8dbHIa5adi1") {
+                    const uidInfo = document.createElement("div");
+                    uidInfo.innerHTML = `<small class="text-muted">UID: ${user.uid}</small>`;
+                    userName.appendChild(uidInfo);
+                }
+
                 cargarComentarios();
             } else {
                 loginBtn.classList.remove("d-none");
@@ -160,6 +168,7 @@
             });
         }
     </script>
+
 </body>
 
 </html>
