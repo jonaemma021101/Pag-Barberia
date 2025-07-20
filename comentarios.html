@@ -7,20 +7,10 @@
     <title>Comentarios - Barbería JEHO</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-    <!-- Firebase modular v9+ -->
-    <script type="module">
-        // Importar desde Firebase CDN con módulos ES import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"; import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-        import { getFirestore, collection, addDoc, orderBy, getDocs, query, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js"; const firebaseConfig = { apiKey: "AIzaSyAcnm24xc8em4MWFXyLuHvvlmdGCVS47Qc", authDomain:
-        "barberiajeho.firebaseapp.com", projectId: "barberiajeho", storageBucket: "barberiajeho.appspot.com", messagingSenderId: "168190651597", appId: "1:168190651597:web:277b9c4665b95a3a064d84", measurementId: "G-3SJQ2BQ4XL" }; const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app); const db = getFirestore(app); const loginBtn = document.getElementById("googleSignIn"); const logoutBtn = document.getElementById("logoutBtn"); const userName = document.getElementById("userName"); const commentForm
-        = document.getElementById("commentForm"); const comentarioInput = document.getElementById("comentario"); const enviarComentario = document.getElementById("enviarComentario"); const comentariosList = document.getElementById("comentariosList");
-        onAuthStateChanged(auth, user => { if (user) { loginBtn.classList.add("d-none"); logoutBtn.classList.remove("d-none"); commentForm.classList.remove("d-none"); userName.textContent = user.displayName; cargarComentarios(); } else { loginBtn.classList.remove("d-none");
-        logoutBtn.classList.add("d-none"); commentForm.classList.add("d-none"); userName.textContent = ""; } }); loginBtn.addEventListener("click", async () => { const provider = new GoogleAuthProvider(); try { await signInWithPopup(auth, provider); }
-        catch (error) { console.error("Error al iniciar sesión:", error); } }); logoutBtn.addEventListener("click", () => { signOut(auth); }); enviarComentario.addEventListener("click", async () => { const texto = comentarioInput.value.trim(); if (!texto)
-        return; const user = auth.currentUser; await addDoc(collection(db, "comentarios"), { nombre: user.displayName, texto, timestamp: serverTimestamp() }); comentarioInput.value = ""; cargarComentarios(); }); async function cargarComentarios() { const
-        q = query(collection(db, "comentarios"), orderBy("timestamp", "desc")); const snapshot = await getDocs(q); comentariosList.innerHTML = ""; snapshot.forEach(doc => { const data = doc.data(); const div = document.createElement("div"); div.classList.add("mb-2");
-        div.innerHTML = `<strong>${data.nombre}:</strong> ${data.texto}`; comentariosList.appendChild(div); }); }
-    </script>
+    <!-- Firebase SDK v9 con compat -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
 
     <style>
         body {
@@ -89,6 +79,87 @@
     <footer class="bg-dark text-white text-center p-3 mt-5">
         <p class="mb-0">&copy; 2025 Barbería JEHO. Todos los derechos reservados.</p>
     </footer>
+
+    <script>
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyAcnm24xc8em4MWFXyLuHvvlmdGCVS47Qc",
+            authDomain: "barberiajeho.firebaseapp.com",
+            projectId: "barberiajeho",
+            storageBucket: "barberiajeho.appspot.com",
+            messagingSenderId: "168190651597",
+            appId: "1:168190651597:web:277b9c4665b95a3a064d84",
+            measurementId: "G-3SJQ2BQ4XL"
+        };
+
+        // Inicialización Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Elementos del DOM
+        const loginBtn = document.getElementById("googleSignIn");
+        const logoutBtn = document.getElementById("logoutBtn");
+        const userName = document.getElementById("userName");
+        const commentForm = document.getElementById("commentForm");
+        const comentarioInput = document.getElementById("comentario");
+        const enviarComentario = document.getElementById("enviarComentario");
+        const comentariosList = document.getElementById("comentariosList");
+
+        // Listener de autenticación
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                loginBtn.classList.add("d-none");
+                logoutBtn.classList.remove("d-none");
+                commentForm.classList.remove("d-none");
+                userName.textContent = user.displayName;
+                cargarComentarios();
+            } else {
+                loginBtn.classList.remove("d-none");
+                logoutBtn.classList.add("d-none");
+                commentForm.classList.add("d-none");
+                userName.textContent = "";
+            }
+        });
+
+        // Iniciar sesión con Google
+        loginBtn.addEventListener("click", () => {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider).catch(console.error);
+        });
+
+        // Cerrar sesión
+        logoutBtn.addEventListener("click", () => {
+            auth.signOut();
+        });
+
+        // Enviar comentario
+        enviarComentario.addEventListener("click", async() => {
+            const texto = comentarioInput.value.trim();
+            if (!texto) return;
+            const user = auth.currentUser;
+            await db.collection("comentarios").add({
+                nombre: user.displayName,
+                texto,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            comentarioInput.value = "";
+            cargarComentarios();
+        });
+
+        // Cargar comentarios
+        async function cargarComentarios() {
+            const snapshot = await db.collection("comentarios").orderBy("timestamp", "desc").get();
+            comentariosList.innerHTML = "";
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                const div = document.createElement("div");
+                div.classList.add("mb-2");
+                div.innerHTML = `<strong>${data.nombre}:</strong> ${data.texto}`;
+                comentariosList.appendChild(div);
+            });
+        }
+    </script>
 </body>
 
 </html>
