@@ -4,11 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Barbería JEHO</title>
+    <title>Galería - Barbería JEHO</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js"></script>
     <style>
         body {
             background-color: #f5f5f5;
@@ -52,30 +49,16 @@
         <a href="galeria.html" class="text-white mx-3">Galería</a>
     </nav>
 
-    <div class="container mt-5">
-        <h2>Comentarios</h2>
+    <h1>Galería de la Barbería JEHO</h1>
 
-        <div id="userSection" class="mb-3">
-            <button id="googleSignIn" class="btn btn-danger">Iniciar sesión con Google</button>
-            <button id="logoutBtn" class="btn btn-secondary d-none">Cerrar sesión</button>
-            <span id="userName" class="ms-2"></span>
-        </div>
+    <button id="loginBtn">Iniciar sesión con Google</button>
 
-        <div id="commentForm" class="mb-4 d-none">
-            <label for="comentario" class="form-label">Escribe tu comentario:</label>
-            <textarea id="comentario" class="form-control mb-2"></textarea>
-            <button id="enviarComentario" class="btn btn-primary">Enviar</button>
-        </div>
-
-        <div id="commentSection">
-            <h5>Comentarios de otros usuarios:</h5>
-            <div id="comentariosList" class="border p-3 bg-light"></div>
-        </div>
+    <div id="uploadSection">
+        <input type="file" id="imageInput" />
+        <button onclick="uploadImage()">Subir imagen</button>
     </div>
 
-    <footer class="bg-dark text-white text-center p-3 mt-5">
-        <p class="mb-0">&copy; 2025 Barbería JEHO. Todos los derechos reservados.</p>
-    </footer>
+    <div class="gallery" id="gallery"></div>
 
     <script>
         const firebaseConfig = {
@@ -88,68 +71,65 @@
             measurementId: "G-3SJQ2BQ4XL"
         };
 
-        const app = firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const db = firebase.firestore();
+        // ⚠️ Coloca aquí tu UID de Firebase (después de iniciar sesión, lo verás en consola)
+        const adminUID = "REEMPLAZAR_POR_TU_UID";
 
-        const loginBtn = document.getElementById("googleSignIn");
-        const logoutBtn = document.getElementById("logoutBtn");
-        const userName = document.getElementById("userName");
-        const userSection = document.getElementById("userSection");
-        const commentForm = document.getElementById("commentForm");
-        const comentarioInput = document.getElementById("comentario");
-        const enviarComentario = document.getElementById("enviarComentario");
-        const comentariosList = document.getElementById("comentariosList");
+        // Inicializa Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const storage = firebase.storage();
+
+        const loginBtn = document.getElementById("loginBtn");
+        const uploadSection = document.getElementById("uploadSection");
+
+        loginBtn.onclick = () => {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider)
+                .then(result => {
+                    console.log("UID:", result.user.uid);
+                    if (result.user.uid !== adminUID) {
+                        alert("No tienes permiso para subir imágenes.");
+                    }
+                });
+        };
 
         auth.onAuthStateChanged(user => {
-            if (user) {
-                loginBtn.classList.add("d-none");
-                logoutBtn.classList.remove("d-none");
-                commentForm.classList.remove("d-none");
-                userName.textContent = user.displayName;
-                cargarComentarios();
-            } else {
-                loginBtn.classList.remove("d-none");
-                logoutBtn.classList.add("d-none");
-                commentForm.classList.add("d-none");
-                userName.textContent = "";
+            if (user && user.uid === adminUID) {
+                uploadSection.style.display = "block";
             }
         });
 
-        loginBtn.addEventListener("click", () => {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            auth.signInWithPopup(provider).catch(console.error);
-        });
+        function uploadImage() {
+            const file = document.getElementById("imageInput").files[0];
+            if (!file) return alert("Selecciona una imagen");
 
-        logoutBtn.addEventListener("click", () => {
-            auth.signOut();
-        });
-
-        enviarComentario.addEventListener("click", async() => {
-            const texto = comentarioInput.value.trim();
-            if (!texto) return;
-            const user = auth.currentUser;
-            await db.collection("comentarios").add({
-                nombre: user.displayName,
-                texto,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            });
-            comentarioInput.value = "";
-            cargarComentarios();
-        });
-
-        async function cargarComentarios() {
-            const snapshot = await db.collection("comentarios").orderBy("timestamp", "desc").get();
-            comentariosList.innerHTML = "";
-            snapshot.forEach(doc => {
-                const data = doc.data();
-                const div = document.createElement("div");
-                div.classList.add("mb-2");
-                div.innerHTML = `<strong>${data.nombre}:</strong> ${data.texto}`;
-                comentariosList.appendChild(div);
+            const storageRef = storage.ref("galeria/" + Date.now() + "-" + file.name);
+            storageRef.put(file).then(() => {
+                alert("Imagen subida con éxito");
+                loadGallery();
             });
         }
+
+        function loadGallery() {
+            const gallery = document.getElementById("gallery");
+            gallery.innerHTML = "";
+            const listRef = storage.ref("galeria/");
+            listRef.listAll().then(res => {
+                res.items.forEach(itemRef => {
+                    itemRef.getDownloadURL().then(url => {
+                        const img = document.createElement("img");
+                        img.src = url;
+                        gallery.appendChild(img);
+                    });
+                });
+            });
+        }
+
+        loadGallery();
     </script>
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2025 Barbería JEHO. Todos los derechos reservados.</p>
+    </footer>
 </body>
 
 </html>
