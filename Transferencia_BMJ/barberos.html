@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transferencia - Barberia BMJ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Oswald:wght@500;700&family=Roboto+Mono&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* Estos estilos están aquí para que no tengas que modificar el styles.css directamente,
+           pero lo ideal sería moverlos a styles.css si quieres un CSS más limpio. */
+        
+        .nombre-display {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding: 10px 0;
+            border-top: 1px solid #ccc;
+        }
+        
+        .nombre-barbero {
+            text-align: left;
+            margin: 0;
+            font-size: 1.1em;
+            color: #1a1a1a;
+            font-weight: 700;
+            flex-grow: 1;
+            padding-right: 10px;
+        }
+        
+        .copy-name-btn {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            font-size: 0.9em;
+            border-radius: 5px;
+            flex-shrink: 0;
+        }
+        
+        .copy-name-btn:hover {
+            background-color: #555;
+        }
+        
+        .copy-name-btn.copied {
+            background-color: #28a745;
+        }
+        /* NUEVOS ESTILOS PARA LOS LOGOS DE BANCO DENTRO DEL HTML (mover a styles.css es mejor) */
+        
+        .bank-logo {
+            width: 100px;
+            /* Ancho deseado para los logos */
+            height: auto;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            /* Espacio debajo del logo */
+            filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.3));
+            /* Pequeña sombra para resaltar */
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo-container">
+            <img src="logo.png" alt="Logo Barberia BMJ" class="logo-image">
+            <span class="logo-text">Barberia BMJ</span>
+        </div>
+        <h1>Barberia BMJ: Agradece su preferencia.</h1>
+    </header>
+
+    <main class="container">
+        <section class="info-section">
+            <h2>💳 Pago por Transferencia</h2>
+            <p>A continuación, encontrarás los datos de tarjeta de ambos barberos. Por favor, verifica el nombre antes de realizar cualquier transferencia. Puedes copiar el <b>número de tarjeta</b> y el <b>nombre del titular </b>fácilmente con un solo clic.</p>
+        </section>
+
+        <div class="barberos-grid">
+
+            <div class="card azteca-card">
+                <h3>Jonathan Hernández</h3>
+                <p class="lema-barbero">Banco Azteca</p>
+                <img src="logo_azteca.png" alt="Logo Banco Azteca" class="bank-logo">
+
+                <div class="card-info">
+                    <p class="label">Número de Tarjeta (CLABE/Cuenta):</p>
+                    <div class="tarjeta-display">
+                        <span id="tarjeta-jonathanhernandez" class="numero-tarjeta">4831 1212 0118 6906</span>
+                        <button class="copy-btn" data-target="tarjeta-jonathanhernandez" onclick="copyToClipboard(this)">
+                            Copiar
+                        </button>
+                    </div>
+
+                    <div class="nombre-display">
+                        <span id="nombre-jonathanhernandez" class="nombre-barbero">Titular: Jonathan Emmanuel Hernández Ortiz</span>
+                        <button class="copy-name-btn" data-target="nombre-jonathanhernandez" onclick="copyName(this)">
+                            Copiar Nombre
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card nu-card">
+                <h3>Víctor Miguel</h3>
+                <p class="lema-barbero">NU México</p>
+                <img src="logo_nu.png" alt="Logo NU México" class="bank-logo">
+
+                <div class="card-info">
+                    <p class="label">Número de Tarjeta (CLABE/Cuenta):</p>
+                    <div class="tarjeta-display">
+                        <span id="tarjeta-victormiguel" class="numero-tarjeta">4099 8765 4321 0987</span>
+                        <button class="copy-btn" data-target="tarjeta-victormiguel" onclick="copyToClipboard(this)">
+                            Copiar
+                        </button>
+                    </div>
+
+                    <div class="nombre-display">
+                        <span id="nombre-victormiguel" class="nombre-barbero">Titular: Victor Miguel Sanchez Dominguez</span>
+                        <button class="copy-name-btn" data-target="nombre-victormiguel" onclick="copyName(this)">
+                            Copiar Nombre
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Barberia BMJ. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Función para COPIAR EL NÚMERO DE TARJETA
+        function copyToClipboard(button) {
+            const targetId = button.getAttribute('data-target');
+            const targetElement = document.getElementById(targetId);
+
+            // OBTENEMOS EL TEXTO VISIBLE (CON ESPACIOS)
+            const fullNumberText = targetElement.textContent;
+
+            // **********************************************
+            // NUEVA LÍNEA CLAVE: ELIMINAR TODOS LOS ESPACIOS
+            // **********************************************
+            const numberToCopy = fullNumberText.replace(/ /g, '').trim();
+
+            // Crea un área de texto temporal para la copia
+            const tempInput = document.createElement('textarea');
+            tempInput.value = numberToCopy; // Usamos el número sin espacios
+            document.body.appendChild(tempInput);
+
+            // Selecciona y copia el texto
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            // Retroalimentación al usuario
+            const originalText = button.textContent;
+            button.textContent = '¡Copiado!';
+            button.classList.add('copied');
+
+            // Vuelve al texto original después de 2 segundos
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.classList.remove('copied');
+            }, 2000);
+        }
+
+        // FUNCIÓN para COPIAR EL NOMBRE DEL TITULAR (esta no cambia)
+        function copyName(button) {
+            const targetId = button.getAttribute('data-target');
+            const targetElement = document.getElementById(targetId);
+
+            // Extraer solo el nombre (remover "Titular: ")
+            const fullText = targetElement.textContent;
+            const nameToCopy = fullText.replace('Titular: ', '').trim();
+
+            const tempInput = document.createElement('textarea');
+            tempInput.value = nameToCopy; // Copiar solo el nombre
+            document.body.appendChild(tempInput);
+
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            const originalText = button.textContent;
+            button.textContent = '¡Nombre Copiado!';
+            button.classList.add('copied');
+
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.classList.remove('copied');
+            }, 2000);
+        }
+    </script>
+</body>
+
+</html>

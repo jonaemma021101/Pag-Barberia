@@ -167,10 +167,26 @@
         const userInfo = document.getElementById('user-info'); loginBtn.onclick = () => signInWithPopup(auth, provider); logoutBtn.onclick = () => signOut(auth); onAuthStateChanged(auth, user => { if (user) { loginBtn.style.display = 'none'; logoutBtn.style.display
         = 'inline'; commentForm.style.display = 'block'; userInfo.style.display = 'block'; userInfo.innerHTML = `Hola, <b>${user.displayName}</b>`; } else { loginBtn.style.display = 'inline'; logoutBtn.style.display = 'none'; commentForm.style.display
         = 'none'; userInfo.style.display = 'none'; } }); document.getElementById("enviarComentario").addEventListener("click", async () => { const comentario = document.getElementById("comentario").value; const user = auth.currentUser; if (comentario.trim()
-        && user) { await addDoc(collection(db, "comentarios"), { nombre: user.displayName, uid: user.uid, comentario: comentario, fechaEnvio: serverTimestamp() }); alert("Comentario enviado"); document.getElementById("comentario").value = ""; } }); import
-        { onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js"; // Escuchar en tiempo real los comentarios const comentariosRef = collection(db, "comentarios"); const q = query(comentariosRef, orderBy("fechaEnvio",
-        "desc")); const lista = document.getElementById("listaComentarios"); onSnapshot(q, (snapshot) => { lista.innerHTML = ""; // Limpiar lista antes de renderizar snapshot.forEach((doc) => { const data = doc.data(); const li = document.createElement("li");
-        li.className = "list-group-item"; li.innerHTML = `<strong>${data.nombre}</strong><br>${data.comentario}`; lista.appendChild(li); }); });
+        && user) { await addDoc(collection(db, "comentarios"), { nombre: user.displayName, uid: user.uid, comentario: comentario, fechaEnvio: serverTimestamp() }); alert("Comentario enviado"); document.getElementById("comentario").value = ""; } });
+
+        import { onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+        // Escuchar en tiempo real los comentarios
+        const comentariosRef = collection(db, "comentarios");
+        const q = query(comentariosRef, orderBy("fechaEnvio", "desc"));
+
+        const lista = document.getElementById("listaComentarios");
+
+        onSnapshot(q, (snapshot) => {
+            lista.innerHTML = ""; // Limpiar lista antes de renderizar
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+                const li = document.createElement("li");
+                li.className = "list-group-item";
+                li.innerHTML = `<strong>${data.nombre}</strong><br>${data.comentario}`;
+                lista.appendChild(li);
+            });
+        });
 
     </script>
 
