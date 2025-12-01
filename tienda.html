@@ -5,116 +5,134 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Tienda - Barbería JEHO</title>
+    <link rel="stylesheet" href="styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <style>
-        body {
-            background-color: #f5f5f5;
-            color: #333;
-        }
-        
-        header {
-            background-color: #111;
-            color: white;
-            padding: 2rem 0;
-            text-align: center;
-        }
-        
-        nav {
-            background-color: #333;
-        }
-        
-        nav a {
-            color: white !important;
-            margin: 0 10px;
-        }
-        
-        nav a:hover {
-            text-decoration: underline;
-        }
-        
-        .card-title {
-            color: #000;
-        }
-        
-        .producto img {
-            max-height: 180px;
-            object-fit: contain;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
 <body>
-    <header>
-        <h1>Barbería JEHO</h1>
-        <p>Estilo, elegancia y tradición</p>
+
+    <header class="jeho-header">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-center flex-wrap">
+
+                <img src="logo.png" alt="Logo de Barbería BMJ" class="jeho-logo logo-right ms-3">
+
+            </div>
+            <h1 class="jeho-slogan mt-2">Estilo, elegancia y tradición</h1>
+        </div>
     </header>
 
-    <nav class="bg-secondary text-white text-center py-2">
-        <a href="index.html" class="text-white mx-3">Inicio</a>
-        <a href="servicios.html" class="text-white mx-3">Servicios</a>
-        <a href="tienda.html" class="text-white mx-3">Tienda</a>
-        <a href="contacto.html" class="text-white mx-3">Contacto</a>
-        <a href="comentarios.html" class="text-white mx-3">Comentarios</a>
-        <a href="galeria.html" class="text-white mx-3">Galería</a>
-    </nav>
-    <div class="container my-5">
-        <h2 class="text-center mb-4">Tienda de Productos</h2>
 
-        <div class="row">
-            <!-- Producto 1 -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm producto">
-                    <img src="img/cera_modeladora.jpg" class="card-img-top" alt="Cera modeladora" />
-                    <div class="card-body">
-                        <h5 class="card-title">Cera Modeladora</h5>
-                        <p class="card-text">Fijación fuerte con aroma a madera. 100ml.</p>
-                        <p><strong>$120 MXN</strong></p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Producto 2 -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm producto">
-                    <img src="img/shampoo_barba.jpg" class="card-img-top" alt="Shampoo para barba" />
-                    <div class="card-body">
-                        <h5 class="card-title">Shampoo para Barba</h5>
-                        <p class="card-text">
-                            Hidratación y suavidad para el cuidado diario de tu barba.
-                        </p>
-                        <p><strong>$90 MXN</strong></p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Producto 3 -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm producto">
-                    <img src="img/peine_madera.jpg" class="card-img-top" alt="Peine de madera" />
-                    <div class="card-body">
-                        <h5 class="card-title">Peine de Madera</h5>
-                        <p class="card-text">Ideal para barba y bigote. Antiestático.</p>
-                        <p><strong>$60 MXN</strong></p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Producto 4 -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm producto">
-                    <img src="img/aceite_barba.jpg" class="card-img-top" alt="Aceite para barba" />
-                    <div class="card-body">
-                        <h5 class="card-title">Aceite para Barba</h5>
-                        <p class="card-text">A base de jojoba y argán. 50ml.</p>
-                        <p><strong>$150 MXN</strong></p>
-                    </div>
-                </div>
+    <nav class="navbar navbar-expand-lg jeho-navbar">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="servicios.html">Servicios</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="tienda.html">Tienda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+                    <li class="nav-item"><a class="nav-link" href="comentarios.html">Comentarios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="galeria.html">Galería</a></li>
+                </ul>
             </div>
         </div>
-    </div>
-    <footer class="bg-dark text-white text-center py-3">
-        <p>&copy; 2025 Barbería JEHO. Todos los derechos reservados.</p>
+    </nav>
+
+    <main class="tienda-productos py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 section-title-light text-dark">Tienda de Productos</h2>
+
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="product-card h-100 shadow-sm">
+                        <img src="img/cera_baregk.jpg" class="card-img-top product-image" alt="Cera Baregk" />
+                        <div class="card-body">
+                            <h5 class="card-title">Cera Baregk</h5>
+                            <p class="card-text">Fijación fuerte con aroma a madera. 150ml.</p>
+                            <p class="product-price"><strong>$150 MXN</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <div class="product-card h-100 shadow-sm">
+                        <img src="img/pomada_qprro.jpg" class="card-img-top product-image" alt="Pomada !Q prro wey!" />
+                        <div class="card-body">
+                            <h5 class="card-title">Pomada ¡Q prro wey!</h5>
+                            <p class="card-text">Pomada base de agua con fijación media y brillo. 150ml.</p>
+                            <p class="product-price"><strong>$150 MXN</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <div class="product-card h-100 shadow-sm highlight-product">
+                        <img src="img/pomada_offroad.jpg" class="card-img-top product-image" alt="Pomada Off Road" />
+                        <div class="card-body">
+                            <h5 class="card-title">Pomada Off Road (R/A)</h5>
+                            <p class="card-text">Pomadas de color Rojo y Azul. Fijación fuerte. 150ml.</p>
+                            <p class="product-price"><strong>$150 MXN</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <div class="product-card h-100 shadow-sm">
+                        <img src="img/navajas.jpg" class="card-img-top product-image" alt="Navajas para afeitar" />
+                        <div class="card-body">
+                            <h5 class="card-title">Navajas para Afeitar</h5>
+                            <p class="card-text">Paquete de navajas de doble filo para un afeitado preciso.</p>
+                            <p class="product-price"><strong>$15 MXN</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <div class="product-card h-100 shadow-sm">
+                        <img src="img/cepillo_barbero.jpg" class="card-img-top product-image" alt="Cepillo Barbero" />
+                        <div class="card-body">
+                            <h5 class="card-title">Cepillo Barbero Negro</h5>
+                            <p class="card-text">Ideal para limpiar residuos después del corte.</p>
+                            <p class="product-price"><strong>$30 MXN</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <div class="product-card h-100 shadow-sm">
+                        <img src="img/guantes_nitrilo.jpg" class="card-img-top product-image" alt="Guantes de Nitrilo" />
+                        <div class="card-body">
+                            <h5 class="card-title">Guantes de Nitrilo (Caja)</h5>
+                            <p class="card-text">Caja de 100 piezas. Protección y seguridad.</p>
+                            <p class="product-price"><strong>$100 MXN</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="text-center mt-5">
+                <a href="contacto.html" class="btn jeho-btn-primary btn-lg">Realiza tu Pedido Aquí</a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="jeho-footer">
+        <div class="container text-center">
+            <p>&copy; 2025 Barbería JEHO. Todos los derechos reservados.</p>
+            <div class="social-icons mt-2">
+                <a href="#" class="text-white mx-2"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-white mx-2"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
