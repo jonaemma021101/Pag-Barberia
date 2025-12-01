@@ -1,177 +1,341 @@
-/* Variables de Color */
+/* =========================================================================
+   VARIABLES DE COLOR
+   Define los colores principales de tu sitio web (Dark Theme)
+   ========================================================================= */
 
 :root {
     --color-primary: #111111;
-    /* Negro para fondos principales */
-    --color-secondary: #222222;
-    /* Gris oscuro para navegación y secciones */
-    --color-text-light: #ffffff;
-    /* Blanco para texto sobre fondos oscuros */
-    --color-text-dark: #333333;
-    /* Gris oscuro para texto sobre fondos claros */
-    --color-accent-red: #c90000;
-    /* Rojo vibrante de barbería */
+    /* Negro Oscuro (Fondo de cabecera/pie) */
+    --color-secondary: #333333;
+    /* Gris Oscuro (Fondo de navegación) */
+    --color-accent-red: #C90000;
+    /* Rojo de acento (Botones principales, borde) */
     --color-accent-blue: #007bff;
-    /* Azul de acento */
-    --color-background-light: #f5f5f5;
-    /* Gris muy claro para el fondo del body */
+    /* Azul de acento (Precio, enlaces, detalles) */
+    --color-background-dark: #222222;
+    /* Fondo oscuro principal */
+    --color-background-light: #F5F5F5;
+    /* Fondo claro para secciones de contenido */
+    --color-text-light: #FFFFFF;
+    /* Texto sobre fondos oscuros */
+    --color-text-dark: #333333;
+    /* Texto sobre fondos claros */
 }
 
 
-/* Estilos Generales */
+/* =========================================================================
+   ESTILOS BASE
+   ========================================================================= */
 
 body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: Arial, sans-serif;
     background-color: var(--color-background-light);
     color: var(--color-text-dark);
 }
 
+.text-dark {
+    color: var(--color-text-dark) !important;
+}
 
-/* Encabezado (Header) */
+
+/* Títulos de sección claros sobre fondo claro */
+
+.section-title-light {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    border-bottom: 3px solid var(--color-accent-red);
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+
+/* =========================================================================
+   BOTONES PERSONALIZADOS
+   ========================================================================= */
+
+.jeho-btn-primary {
+    background-color: var(--color-accent-red) !important;
+    border-color: var(--color-accent-red) !important;
+    color: var(--color-text-light) !important;
+    font-weight: 600;
+    padding: 10px 20px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.jeho-btn-primary:hover {
+    background-color: #A00000 !important;
+    /* Tono más oscuro de rojo */
+    border-color: #A00000 !important;
+    transform: translateY(-2px);
+}
+
+
+/* Botón de WhatsApp (verde) */
+
+.btn-success {
+    background-color: #25d366 !important;
+    border-color: #25d366 !important;
+    color: white !important;
+}
+
+.btn-success:hover {
+    background-color: #1da851 !important;
+    border-color: #1da851 !important;
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================================
+   HEADER (CABECERA) Y LOGO - AJUSTE PARA APILAR LOGO Y FRASE
+   ========================================================================= */
 
 .jeho-header {
     background-color: var(--color-primary);
     color: var(--color-text-light);
-    padding: 3rem 0;
+    padding: 1.5rem 0;
     text-align: center;
     border-bottom: 5px solid var(--color-accent-red);
-    /* Detalle de color */
 }
 
+.jeho-header .container {
+    /* CLAVE: Usamos flexbox para centrar y APILAR verticalmente */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.jeho-logo {
+    /* Tamaño del logo */
+    width: 150px;
+    height: auto;
+    max-width: 90%;
+    margin-bottom: 15px;
+    /* Espacio entre el logo y la frase */
+}
+
+
+/* Si usas la imagen del logo y quieres ocultar el título de texto: */
+
 .jeho-title {
-    font-size: 3.5rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    margin-bottom: 0.5rem;
+    display: none;
 }
 
 .jeho-slogan {
+    /* La frase "Estilo, elegancia y tradición" */
+    font-size: 1.2rem;
     font-style: italic;
     color: #aaaaaa;
-    /* Gris más claro para el eslogan */
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 
-/* Barra de Navegación (Nav) */
+/* Desktop: Ajuste de tamaño en pantallas más grandes */
+
+@media (min-width: 768px) {
+    .jeho-logo {
+        width: 180px;
+    }
+}
+
+
+/* =========================================================================
+   NAVBAR (NAVEGACIÓN) - AJUSTE MÓVIL Y ESTÉTICA OSCURA
+   ========================================================================= */
 
 .jeho-navbar {
-    background-color: var(--color-secondary);
-    padding: 0.5rem 1rem;
+    background-color: var(--color-secondary) !important;
+    padding: 0.5rem 0;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .jeho-navbar .nav-link {
     color: var(--color-text-light) !important;
-    font-weight: 500;
-    text-transform: uppercase;
-    padding: 1rem 1.5rem;
-    transition: color 0.3s, background-color 0.3s;
+    font-weight: 600;
+    padding: 10px 15px;
+    transition: background-color 0.3s;
+    border-radius: 5px;
 }
 
 .jeho-navbar .nav-link:hover,
 .jeho-navbar .nav-link.active {
-    color: var(--color-accent-blue) !important;
-    /* Resalta con azul al pasar el ratón o en la página activa */
-    background-color: #333333;
-}
-
-
-/* Sección Héroe (Principal) */
-
-.jeho-hero {
-    min-height: 70vh;
-    /* Ocupa al menos el 70% de la altura de la ventana */
-    background-image: url('barber-background.jpg');
-    /* ¡Reemplaza con una imagen de alta calidad! */
-    background-size: cover;
-    background-position: center;
-    color: var(--color-text-light);
-    position: relative;
-    z-index: 1;
-    /* Para que el contenido esté sobre el fondo oscuro */
-}
-
-
-/* Superposición oscura para mejorar la legibilidad del texto */
-
-.jeho-hero::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.6);
-    /* Negro semitransparente */
-    z-index: -1;
-}
-
-.jeho-hero h2 {
-    font-size: 3rem;
-    font-weight: 700;
-    text-shadow: 2px 2px 4px #000;
-}
-
-.jeho-hero .lead {
-    font-size: 1.25rem;
-}
-
-
-/* Botones de Acción */
-
-.jeho-btn-primary {
+    color: var(--color-text-light) !important;
     background-color: var(--color-accent-red);
-    /* El botón principal usa el acento rojo */
-    border-color: var(--color-accent-red);
-    color: var(--color-text-light);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 10px 30px;
-    border-radius: 5px;
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-.jeho-btn-primary:hover {
-    background-color: #a30000;
-    /* Un rojo más oscuro al pasar el ratón */
-    border-color: #a30000;
-    transform: translateY(-2px);
-    /* Pequeño efecto de elevación */
+    /* Fondo rojo al pasar el ratón */
 }
 
 
-/* Pie de Página (Footer) */
+/* Estilo para el ícono de la hamburguesa en móvil */
+
+.jeho-navbar .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.jeho-navbar .navbar-toggler i {
+    color: var(--color-text-light) !important;
+    font-size: 1.5rem;
+}
+
+
+/* =========================================================================
+   FOOTER (PIE DE PÁGINA)
+   ========================================================================= */
 
 .jeho-footer {
     background-color: var(--color-primary);
-    color: #aaaaaa;
+    color: var(--color-text-light);
     padding: 1.5rem 0;
-    border-top: 3px solid var(--color-accent-blue);
-    /* Detalle de color */
+    margin-top: 0;
+    border-top: 3px solid var(--color-accent-red);
 }
 
-.jeho-footer a {
+.jeho-footer p {
+    margin-bottom: 5px;
+}
+
+.social-icons a {
     color: var(--color-text-light);
+    font-size: 1.5rem;
+    margin: 0 10px;
     transition: color 0.3s;
 }
 
-.jeho-footer a:hover {
+.social-icons a:hover {
     color: var(--color-accent-red);
-    /* El rojo para destacar los enlaces sociales */
 }
 
 
-/* Estilos para móviles */
+/* =========================================================================
+   ESTILOS ESPECÍFICOS PARA PÁGINAS
+   ========================================================================= */
 
-@media (max-width: 991.98px) {
-    .jeho-title {
-        font-size: 2.5rem;
-    }
-    .jeho-hero {
-        min-height: 50vh;
-    }
-    .jeho-hero h2 {
-        font-size: 2rem;
-    }
+
+/* --- SERVICIOS --- */
+
+.service-card {
+    background-color: var(--color-text-light);
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.service-card h5 {
+    color: var(--color-primary);
+    font-weight: 700;
+    border-bottom: 2px solid var(--color-accent-red);
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.service-card p strong {
+    color: var(--color-accent-red);
+    font-size: 1.2rem;
+}
+
+
+/* --- TIENDA --- */
+
+.tienda-productos {
+    background-color: var(--color-background-light);
+}
+
+.product-card {
+    background-color: var(--color-text-light);
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--color-accent-red);
+}
+
+.product-image {
+    max-height: 200px;
+    width: 100%;
+    object-fit: contain;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+.product-card .card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.product-price {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--color-accent-blue);
+    margin-top: 10px;
+}
+
+
+/* --- CONTACTO --- */
+
+.contacto-main {
+    background-color: var(--color-background-light);
+}
+
+.contact-info-card,
+.contact-form-card {
+    background-color: var(--color-text-light);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.contact-info-card p {
+    font-size: 1.1rem;
+}
+
+.card-title-contact {
+    font-weight: 700;
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-accent-blue);
+    padding-bottom: 5px;
+}
+
+
+/* Iconos de contacto */
+
+.icon-red {
+    color: var(--color-accent-red);
+}
+
+.icon-blue {
+    color: var(--color-accent-blue);
+}
+
+
+/* Foco de inputs del formulario */
+
+.contact-input:focus {
+    border-color: var(--color-accent-red) !important;
+    box-shadow: 0 0 0 0.25rem rgba(201, 0, 0, 0.25) !important;
+}
+
+
+/* Estilo para la sección del mapa */
+
+.map-container {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.map-container iframe {
+    border: none;
 }
