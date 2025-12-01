@@ -1,0 +1,177 @@
+/* Variables de Color */
+
+:root {
+    --color-primary: #111111;
+    /* Negro para fondos principales */
+    --color-secondary: #222222;
+    /* Gris oscuro para navegación y secciones */
+    --color-text-light: #ffffff;
+    /* Blanco para texto sobre fondos oscuros */
+    --color-text-dark: #333333;
+    /* Gris oscuro para texto sobre fondos claros */
+    --color-accent-red: #c90000;
+    /* Rojo vibrante de barbería */
+    --color-accent-blue: #007bff;
+    /* Azul de acento */
+    --color-background-light: #f5f5f5;
+    /* Gris muy claro para el fondo del body */
+}
+
+
+/* Estilos Generales */
+
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: var(--color-background-light);
+    color: var(--color-text-dark);
+}
+
+
+/* Encabezado (Header) */
+
+.jeho-header {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    padding: 3rem 0;
+    text-align: center;
+    border-bottom: 5px solid var(--color-accent-red);
+    /* Detalle de color */
+}
+
+.jeho-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+}
+
+.jeho-slogan {
+    font-style: italic;
+    color: #aaaaaa;
+    /* Gris más claro para el eslogan */
+}
+
+
+/* Barra de Navegación (Nav) */
+
+.jeho-navbar {
+    background-color: var(--color-secondary);
+    padding: 0.5rem 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.jeho-navbar .nav-link {
+    color: var(--color-text-light) !important;
+    font-weight: 500;
+    text-transform: uppercase;
+    padding: 1rem 1.5rem;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.jeho-navbar .nav-link:hover,
+.jeho-navbar .nav-link.active {
+    color: var(--color-accent-blue) !important;
+    /* Resalta con azul al pasar el ratón o en la página activa */
+    background-color: #333333;
+}
+
+
+/* Sección Héroe (Principal) */
+
+.jeho-hero {
+    min-height: 70vh;
+    /* Ocupa al menos el 70% de la altura de la ventana */
+    background-image: url('barber-background.jpg');
+    /* ¡Reemplaza con una imagen de alta calidad! */
+    background-size: cover;
+    background-position: center;
+    color: var(--color-text-light);
+    position: relative;
+    z-index: 1;
+    /* Para que el contenido esté sobre el fondo oscuro */
+}
+
+
+/* Superposición oscura para mejorar la legibilidad del texto */
+
+.jeho-hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    /* Negro semitransparente */
+    z-index: -1;
+}
+
+.jeho-hero h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px #000;
+}
+
+.jeho-hero .lead {
+    font-size: 1.25rem;
+}
+
+
+/* Botones de Acción */
+
+.jeho-btn-primary {
+    background-color: var(--color-accent-red);
+    /* El botón principal usa el acento rojo */
+    border-color: var(--color-accent-red);
+    color: var(--color-text-light);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 10px 30px;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.jeho-btn-primary:hover {
+    background-color: #a30000;
+    /* Un rojo más oscuro al pasar el ratón */
+    border-color: #a30000;
+    transform: translateY(-2px);
+    /* Pequeño efecto de elevación */
+}
+
+
+/* Pie de Página (Footer) */
+
+.jeho-footer {
+    background-color: var(--color-primary);
+    color: #aaaaaa;
+    padding: 1.5rem 0;
+    border-top: 3px solid var(--color-accent-blue);
+    /* Detalle de color */
+}
+
+.jeho-footer a {
+    color: var(--color-text-light);
+    transition: color 0.3s;
+}
+
+.jeho-footer a:hover {
+    color: var(--color-accent-red);
+    /* El rojo para destacar los enlaces sociales */
+}
+
+
+/* Estilos para móviles */
+
+@media (max-width: 991.98px) {
+    .jeho-title {
+        font-size: 2.5rem;
+    }
+    .jeho-hero {
+        min-height: 50vh;
+    }
+    .jeho-hero h2 {
+        font-size: 2rem;
+    }
+}
