@@ -4,93 +4,93 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Contacto - Barbería JEHO</title>
+    <title>Contacto - Barbería BMJ</title>
+    <link rel="stylesheet" href="styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <style>
-        body {
-            background-color: #f5f5f5;
-            color: #333;
-        }
-        
-        header {
-            background-color: #111;
-            color: white;
-            padding: 2rem 0;
-            text-align: center;
-        }
-        
-        nav {
-            background-color: #333;
-        }
-        
-        nav a {
-            color: white !important;
-            margin: 0 10px;
-        }
-        
-        nav a:hover {
-            text-decoration: underline;
-        }
-        
-        .form-control:focus {
-            border-color: #000;
-            box-shadow: none;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
 <body>
-    <header>
-        <h1>Barbería JEHO</h1>
-        <p>Estilo, elegancia y tradición</p>
+
+    <header class="jeho-header">
+        <div class="container">
+            <h1 class="jeho-title">Barbería BMJ</h1>
+            <h2 class="jeho-slogan">Estilo, elegancia y tradición</h2>
+        </div>
     </header>
 
-    <nav class="bg-secondary text-white text-center py-2">
-        <a href="index.html" class="text-white mx-3">Inicio</a>
-        <a href="servicios.html" class="text-white mx-3">Servicios</a>
-        <a href="tienda.html" class="text-white mx-3">Tienda</a>
-        <a href="contacto.html" class="text-white mx-3">Contacto</a>
-        <a href="comentarios.html" class="text-white mx-3">Comentarios</a>
-        <a href="galeria.html" class="text-white mx-3">Galería</a>
-    </nav>
-
-
-    <div class="container my-5">
-        <h2 class="text-center mb-4">Contáctanos</h2>
-
-        <div class="row">
-            <div class="col-md-6 mb-4">
-                <h5>Información de Contacto</h5>
-                <p><strong>Teléfono:</strong> 56 2104 4287</p>
-                <p><strong>WhatsApp:</strong> 56 2104 4287</p>
-                <p><strong>Instagram:</strong> @barberiajeho</p>
-                <p><strong>Ubicación:</strong> Olivar Santa María TULYEHUALCO,Tlahúac CDMX</p>
-            </div>
-
-            <div class="col-md-6">
-                <h5>Envíanos un mensaje por WhatsApp</h5>
-                <form onsubmit="enviarWhatsApp(); return false;">
-                    <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" required />
-                    </div>
-                    <div class="mb-3">
-                        <label for="telefono" class="form-label">Número de Teléfono</label>
-                        <input type="tel" class="form-control" id="telefono" required pattern="[0-9]{10}" placeholder="Ej. 5512345678" />
-                    </div>
-                    <div class="mb-3">
-                        <label for="mensaje" class="form-label">Mensaje</label>
-                        <textarea class="form-control" id="mensaje" rows="4" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-success">Enviar por WhatsApp</button>
-                </form>
+    <nav class="navbar navbar-expand-lg jeho-navbar">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="servicios.html">Servicios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="tienda.html">Tienda</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="contacto.html">Contacto</a></li>
+                    <li class="nav-item"><a class="nav-link" href="comentarios.html">Comentarios</a></li>
+                </ul>
             </div>
         </div>
-    </div>
+    </nav>
+
+    <main class="contacto-main">
+        <div class="container py-5">
+            <h2 class="text-center mb-5 section-title-light text-dark">Contáctanos y Reserva</h2>
+
+            <div class="row">
+                <div class="col-md-5 mb-4 mb-md-0">
+                    <div class="contact-info-card p-4 h-100 shadow-sm">
+                        <h4 class="card-title-contact mb-4"><i class="fas fa-info-circle icon-red"></i> Información Directa</h4>
+                        <p><i class="fas fa-phone-alt icon-blue me-2"></i> <strong>Teléfono:</strong> Jonathan Hernández 56 2104 4287 | Victor Sánchez 55 4894 4023 </p>
+                        <p><i class="fab fa-whatsapp icon-blue me-2"></i> <strong>WhatsApp:</strong> 56 2104 4287</p>
+                        <p><i class="fab fa-instagram icon-blue me-2"></i> <strong>Instagram:</strong> <a href="https://www.instagram.com/barberiabmj?igsh=MWRydDZ0aGN0bTJqaA==" target="_blank" class="text-decoration-none text-dark">@barberiabmj</a></p>
+                        <p><i class="fas fa-map-marker-alt icon-blue me-2"></i> <strong>Ubicación:</strong> Pabellón Tricolor 314 ,Olivar Santa María TULYEHUALCO, Tlahúac CDMX</p>
+                    </div>
+                </div>
+
+                <div class="col-md-7">
+                    <div class="contact-form-card p-4 h-100 shadow-lg">
+                        <h4 class="card-title-contact mb-4"><i class="fab fa-whatsapp icon-red"></i> Envíanos un Mensaje Directo</h4>
+                        <form onsubmit="enviarWhatsApp(); return false;">
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label">Nombre</label>
+                                <input type="text" class="form-control contact-input" id="nombre" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="telefono" class="form-label">Número de Teléfono</label>
+                                <input type="tel" class="form-control contact-input" id="telefono" required pattern="[0-9]{10}" placeholder="Ej. 5512345678" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="mensaje" class="form-label">Mensaje / Motivo de Cita</label>
+                                <textarea class="form-control contact-input" id="mensaje" rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-success btn-lg mt-3 w-100"><i class="fab fa-whatsapp me-2"></i> Enviar por WhatsApp</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="map-section mb-5">
+            <div class="container">
+                <h3 class="text-center mb-4 section-title-light text-dark">Encuéntranos Fácilmente</h3>
+                <div class="map-container shadow-lg">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3766.91817479095!2d-99.01380442533086!3d19.242397546728736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85ce1bfdbe8daad1%3A0x21559656c3f0d190!2sBarber%C3%ADa%20BMJ!5e0!3m2!1ses!2smx!4v1764560922409!5m2!1ses!2smx"
+                        width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ubicación de Barbería JEHO">
+                    </iframe>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
 
     <script>
         function enviarWhatsApp() {
-            const numeroWhatsApp = "5215621044287"; // Reemplaza con tu número real
+            const numeroWhatsApp = "5215621044287"; // Número con código de país 52 + 1 (para celular)
             const nombre = document.getElementById("nombre").value;
             const telefono = document.getElementById("telefono").value;
             const mensaje = document.getElementById("mensaje").value;
@@ -110,22 +110,31 @@
             const fechaTexto = fecha.toLocaleDateString('es-MX', opcionesFecha);
             const horaTexto = fecha.toLocaleTimeString('es-MX', opcionesHora);
 
-            const texto = encodeURIComponent(`*Cliente Barbería:*
+            const texto = encodeURIComponent(`*Cliente Barbería JEHO - Contacto Web*
 
-    📅 *Fecha:* ${fechaTexto}
-    🕒 *Hora:* ${horaTexto}
+📅 *Fecha:* ${fechaTexto}
+🕒 *Hora:* ${horaTexto}
 
-    👤 *Nombre:* ${nombre}
-    📞 *Teléfono:* ${telefono}
-    📝 *Mensaje:* ${mensaje}`);
+👤 *Nombre:* ${nombre}
+📞 *Teléfono:* ${telefono}
+📝 *Mensaje:* ${mensaje}`);
 
             const url = `https://wa.me/${numeroWhatsApp}?text=${texto}`;
             window.open(url, '_blank');
         }
     </script>
-    <footer class="bg-dark text-white text-center py-3">
-        <p>&copy; 2025 Barbería JEHO. Todos los derechos reservados.</p>
+
+    <footer class="jeho-footer">
+        <div class="container text-center">
+            <p>© 2026 Barbería JEHO. Todos los derechos reservados.</p>
+            <div class="social-icons mt-2">
+                <a href="#" class="text-white mx-2"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-white mx-2"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
